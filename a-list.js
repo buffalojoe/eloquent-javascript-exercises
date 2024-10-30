@@ -3,15 +3,16 @@ function arrayToList(array){
     let list = null;
 
     for (i = array.length - 1; i >= 0; i--){
-        listPart = {value: array[i], rest: list}
-        list = listPart
+        listPart = {value: array[i], rest: list};
+        list = listPart;
     }
 
     return list;
 }
 
 function listToArray(list){
-    newList = []
+    
+    newList = [];
 
     for (let node = list; node; node = node.rest) {
         newList.push(node.value);       
@@ -21,26 +22,25 @@ function listToArray(list){
 }
 
 function prepend(element, list) {
-    newList = {value: element, rest: list}
+    newList = {value: element, rest: list};
 
-    return newList
+    return newList;
 }
 
-function nth(list, num) {
-    let index = 0;
+function nth(list, num, index = 0) {
 
     for (let node = list; node; node = node.rest) {
 
-        if (num == index) {
+        if (index == num) {
             return node.value;
+        } else {
+            return nth(node.rest, num, index + 1);
         }
-        
-        index += 1;
+
     }
 
-    return undefined
+    return undefined;
 }
-
 
 console.log(arrayToList([10, 20]));
 console.log(listToArray(arrayToList([10, 20, 30])));
